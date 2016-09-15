@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 public class ContactList extends AppCompatActivity {
 
-    //TODO: make it scroll
+    //TODO: make it scroll BBY
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
