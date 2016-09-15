@@ -5,9 +5,9 @@ package com.chextex.chextex.chextex;
  */
 public class Contact {
 
-    protected String name = "";
-    protected String phoneNumber = "";
-    protected String address = "";
+    protected String name;
+    protected String phoneNumber;
+    protected String address;
 
     public Contact(String name, String phoneNumber, String address) {
         this.name = name;
@@ -38,4 +38,5 @@ public class Contact {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
 }
