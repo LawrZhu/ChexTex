@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Chextex.iml" filepath="$PROJECT_DIR$/Chextex.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ChexTex.iml" filepath="$PROJECT_DIR$/ChexTex.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
