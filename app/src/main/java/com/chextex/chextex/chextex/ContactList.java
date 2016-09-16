@@ -20,6 +20,10 @@ public class ContactList extends AppCompatActivity {
     protected List<Contact> myContacts = new ArrayList<>();
     protected ArrayAdapter<Contact> adapter;
     protected Bundle bundle;
+    protected String name;
+    protected String phoneNumber;
+    protected String address;
+    protected int contactIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,14 @@ public class ContactList extends AppCompatActivity {
 
         // For testing purposes
         createFakeContacts();
+        bundle = getIntent().getExtras();
+        name = bundle.getString("name");
+        phoneNumber = bundle.getString("phoneNumber");
+        address = bundle.getString("address");
+        contactIndex = bundle.getInt("index");
+        Contact temp = new Contact(name, phoneNumber, address);
+        myContacts.set(contactIndex, temp);
+
 
         adapter = new contactListAdapter();
         listView.setAdapter(adapter);
@@ -78,8 +90,10 @@ public class ContactList extends AppCompatActivity {
 
         @Override
         public View getView(int position,View view, ViewGroup parent) {
-            if (view == null)
+            if (view == null) {
                 view = getLayoutInflater().inflate(R.layout.listview_item, parent, false);
+            }
+
             Contact cur = myContacts.get(position);
             TextView name = (TextView) view.findViewById(R.id.contact_name);
             name.setText(cur.getName());

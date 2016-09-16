@@ -40,7 +40,17 @@ public class EditUser extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EditUser.this, ContactList.class));
+                Intent i = new Intent(EditUser.this, ContactList.class);
+
+                bundle = new Bundle();
+                bundle.putString("name", name);
+                bundle.putString("address", address);
+                bundle.putString("phoneNumber", phoneNumber);
+                bundle.putInt("index", contactIndex);
+
+                i.putExtras(bundle);
+
+                startActivity(i);
             }
         });
     }
