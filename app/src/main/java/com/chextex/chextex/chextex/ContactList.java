@@ -27,10 +27,11 @@ public class ContactList extends AppCompatActivity {
         setContentView(R.layout.activity_contact_list);
         listView = (ListView) findViewById(R.id.listView);
 
-        listView.setOnClickListener(new View.OnClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //TODO: LAWRENCE ADD YOUR CODE HERE
+
                 Toast.makeText(ContactList.this, "I HAVE A SMALL PENIS",
                         Toast.LENGTH_LONG).show();
                 Log.d("M","SMALLPENIS");
