@@ -1,6 +1,7 @@
 package com.chextex.chextex.chextex;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,11 +25,13 @@ public class ContactList extends AppCompatActivity {
     protected String phoneNumber;
     protected String address;
     protected int contactIndex;
+    protected boolean firstTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
+
         listView = (ListView) findViewById(R.id.listView);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -52,8 +55,8 @@ public class ContactList extends AppCompatActivity {
                 bundle.putString("address", myContacts.get(i).getAddress());
                 bundle.putString("phoneNumber", myContacts.get(i).getPhoneNumber());
                 bundle.putInt("index", i);
-
                 boobies.putExtras(bundle);
+
 
                 startActivity(boobies);
 
@@ -62,15 +65,23 @@ public class ContactList extends AppCompatActivity {
         });
 
         // For testing purposes
-        createFakeContacts();
-        bundle = getIntent().getExtras();
-        name = bundle.getString("name");
-        phoneNumber = bundle.getString("phoneNumber");
-        address = bundle.getString("address");
-        contactIndex = bundle.getInt("index");
-        Contact temp = new Contact(name, phoneNumber, address);
-        myContacts.set(contactIndex, temp);
+        final String PREFS_NAME = "MyPrefsFile";
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 
+        if(settings.getBoolean("mft", true)) {
+            Log.d("M", "First time opening app");
+            createFakeContacts();
+            settings.edit().putBoolean("mft", false).commit();
+        } else {
+            bundle = getIntent().getExtras();
+            name = bundle.getString("name");
+            phoneNumber = bundle.getString("phoneNumber");
+            address = bundle.getString("address");
+            contactIndex = bundle.getInt("index");
+            Contact temp = new Contact(name, phoneNumber, address);
+            myContacts.set(contactIndex, temp);
+            createFakeContacts();
+        }
 
         adapter = new contactListAdapter();
         listView.setAdapter(adapter);
