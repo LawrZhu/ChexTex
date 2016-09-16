@@ -1,9 +1,11 @@
 package com.chextex.chextex.chextex;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +23,15 @@ public class ContactList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
         listView = (ListView) findViewById(R.id.listView);
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(new Intent(ContactList.this, EditUser.class));
+                //TODO: Need to add logic to push contact data to contact list
+                return true;
+            }
+        });
 
         // For testing purposes
         createFakeContacts();
