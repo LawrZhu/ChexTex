@@ -17,13 +17,20 @@ public class ContactList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
 
-        Contact testContact = new Contact("lawrence","911","address");
-        myContacts.add(testContact);
-
         listView = (ListView)findViewById(R.id.listView);
 
-        adapter = new ArrayAdapter<Contact>(this, android.R.layout.simple_list_item_1,myContacts);
+    }
 
-        listView.setAdapter(adapter);
+    private void createFakeContacts() {
+        Contact testContact = new Contact("lawrence","911","address");
+        Contact testContact2 = new Contact("michael","415","2nd address");
+        myContacts.add(testContact);
+        myContacts.add(testContact2);
+    }
+
+    private class contactListAdapter extends ArrayAdapter<Contact> {
+        public contactListAdapter() {
+            super(ContactList.this,R.layout.activity_contact_list, myContacts);
+        }
     }
 }
