@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ContactList extends AppCompatActivity {
     ListView listView;
-    List<Contact> myContacts = new ArrayList<Contact>();
+    List<Contact> myContacts = new ArrayList<>();
     ArrayAdapter<Contact> adapter;
 
     @Override
@@ -21,6 +21,8 @@ public class ContactList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
         listView = (ListView) findViewById(R.id.listView);
+
+        // For testing purposes
         createFakeContacts();
 
         adapter = new contactListAdapter();
