@@ -20,15 +20,18 @@ public class ContactList extends AppCompatActivity {
     protected ListView listView;
     protected List<Contact> myContacts = new ArrayList<>();
     protected ArrayAdapter<Contact> adapter;
+    protected Bundle bundle;
     protected String name;
     protected String phoneNumber;
     protected String address;
     protected int contactIndex;
+    protected boolean firstTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
+
         listView = (ListView) findViewById(R.id.listView);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -37,7 +40,7 @@ public class ContactList extends AppCompatActivity {
                 //TODO: LAWRENCE ADD YOUR CODE HERE
 
                 Toast.makeText(ContactList.this, "I HAVE A SMALL PENIS",
-                        Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_LONG).show();
                 Log.d("M","SMALLPENIS");
             }
         });
@@ -46,13 +49,40 @@ public class ContactList extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent boobies = new Intent(ContactList.this, EditUser.class);
+
+                bundle = new Bundle();
+                bundle.putString("name", myContacts.get(i).getName());
+                bundle.putString("address", myContacts.get(i).getAddress());
+                bundle.putString("phoneNumber", myContacts.get(i).getPhoneNumber());
+                bundle.putInt("index", i);
+                boobies.putExtras(bundle);
+
+
                 startActivity(boobies);
+
                 return true;
             }
         });
 
+        // For testing purposes
+        final String PREFS_NAME = "MyPrefsFile";
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 
-        createFakeContacts();
+        if(settings.getBoolean("mft", true)) {
+            Log.d("M", "First time opening app");
+            createFakeContacts();
+            settings.edit().putBoolean("mft", false).commit();
+        } else {
+            bundle = getIntent().getExtras();
+            name = bundle.getString("name");
+            phoneNumber = bundle.getString("phoneNumber");
+            address = bundle.getString("address");
+            contactIndex = bundle.getInt("index");
+            Contact temp = new Contact(name, phoneNumber, address);
+            myContacts.set(contactIndex, temp);
+            createFakeContacts();
+        }
+
         adapter = new contactListAdapter();
         listView.setAdapter(adapter);
 
@@ -60,12 +90,8 @@ public class ContactList extends AppCompatActivity {
 
     //Tests to make fake contacts
     private void createFakeContacts() {
-        myContacts.add(new Contact("Lawrence","000-000-0000","548 Market St, San Francisco, CA 94104"));
-        myContacts.add(new Contact("Michael","123-456-7890","1 Grand Ave, San Luis Obispo, CA 93405"));
-    }
-
-    public void createNewContact(){
-
+        myContacts.add(new Contact("lawrence","911","address"));
+        myContacts.add(new Contact("michael","415","2nd address"));
     }
 
     private class contactListAdapter extends ArrayAdapter<Contact> {
