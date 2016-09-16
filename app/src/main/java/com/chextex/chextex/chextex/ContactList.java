@@ -14,9 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactList extends AppCompatActivity {
-    ListView listView;
-    List<Contact> myContacts = new ArrayList<>();
-    ArrayAdapter<Contact> adapter;
+    protected ListView listView;
+    protected List<Contact> myContacts = new ArrayList<>();
+    protected ArrayAdapter<Contact> adapter;
+    protected Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +28,18 @@ public class ContactList extends AppCompatActivity {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(new Intent(ContactList.this, EditUser.class));
-                //TODO: Need to add logic to push contact data to contact list
+                Intent boobies = new Intent(ContactList.this, EditUser.class);
+
+                bundle = new Bundle();
+                bundle.putString("name", myContacts.get(i).getName());
+                bundle.putString("address", myContacts.get(i).getAddress());
+                bundle.putString("phoneNumber", myContacts.get(i).getAddress());
+                bundle.putInt("index", i);
+
+                boobies.putExtras(bundle);
+
+                startActivity(boobies);
+
                 return true;
             }
         });
