@@ -33,7 +33,7 @@ public class ContactList extends AppCompatActivity {
                 bundle = new Bundle();
                 bundle.putString("name", myContacts.get(i).getName());
                 bundle.putString("address", myContacts.get(i).getAddress());
-                bundle.putString("phoneNumber", myContacts.get(i).getAddress());
+                bundle.putString("phoneNumber", myContacts.get(i).getPhoneNumber());
                 bundle.putInt("index", i);
 
                 boobies.putExtras(bundle);

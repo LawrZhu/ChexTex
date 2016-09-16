@@ -31,8 +31,8 @@ public class EditUser extends AppCompatActivity {
         EditText pa = (EditText)findViewById(R.id.postalAddress);
         EditText pn = (EditText)findViewById(R.id.phoneNumber);
         n.setText(name);
-        pa.setText(address);
         pn.setText(phoneNumber);
+        pa.setText(address);
 
         confirm = (Button)findViewById(R.id.confirm);
 
